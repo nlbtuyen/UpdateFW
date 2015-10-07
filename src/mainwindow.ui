@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>250</width>
-    <height>400</height>
+    <height>440</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,13 +19,13 @@
   <property name="minimumSize">
    <size>
     <width>250</width>
-    <height>400</height>
+    <height>440</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>250</width>
-    <height>400</height>
+    <height>440</height>
    </size>
   </property>
   <property name="contextMenuPolicy">
@@ -51,10 +51,13 @@
     <string notr="true"/>
    </property>
    <widget class="QGroupBox" name="groupBox_SelectFW">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>40</y>
       <width>230</width>
       <height>121</height>
      </rect>
@@ -190,9 +193,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>140</y>
+      <y>170</y>
       <width>230</width>
-      <height>211</height>
+      <height>210</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -204,13 +207,13 @@
     <property name="minimumSize">
      <size>
       <width>230</width>
-      <height>150</height>
+      <height>210</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
       <width>230</width>
-      <height>500</height>
+      <height>210</height>
      </size>
     </property>
     <property name="font">
@@ -227,8 +230,51 @@ padding: 10px;</string>
      <bool>false</bool>
     </property>
    </widget>
+   <widget class="QPushButton" name="btn_connectBoard">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>201</width>
+      <height>25</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Connect to Board</string>
+    </property>
+   </widget>
+   <widget class="QScrollArea" name="scrollArea">
+    <property name="geometry">
+     <rect>
+      <x>216</x>
+      <y>10</y>
+      <width>24</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: red;
+border-radius: 12;</string>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>24</width>
+       <height>24</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="sizePolicy">
     <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
      <horstretch>0</horstretch>
@@ -318,7 +364,11 @@ border-bottom: 1px solid;
    <addaction name="menuWidgets"/>
    <addaction name="menuHelp"/>
   </widget>
+  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionConnect">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../terminal.qrc">
      <normaloff>:/images/connect-24.png</normaloff>:/images/connect-24.png</iconset>
@@ -331,6 +381,9 @@ border-bottom: 1px solid;
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
+   </property>
+   <property name="visible">
+    <bool>true</bool>
    </property>
   </action>
   <action name="actionConfigure">

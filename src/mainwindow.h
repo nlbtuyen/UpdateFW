@@ -101,6 +101,8 @@ public slots:
     /**   Shows a critical message as popup or as widget */
     void showCriticalMessage(const QString& title, const QString& message);
 
+    void heartbeatTimeout(bool timeout, unsigned int ms);
+    void updateGUI(bool ready);
 
 public:
     Ui::MainWindow *ui;
