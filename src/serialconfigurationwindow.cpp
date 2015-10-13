@@ -244,7 +244,6 @@ void SerialConfigurationWindow::setupPortList()
 
 void SerialConfigurationWindow::portError(const QString &err) {
     QMessageBox msgBox(this);
-//    msgBox.setWindowFlags(Qt::Dialog);
     msgBox.setWindowFlags(Qt::WindowStaysOnTopHint);
     msgBox.setIcon(QMessageBox::Critical);
     msgBox.setText(tr("Error in port settings"));

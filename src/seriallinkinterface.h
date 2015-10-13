@@ -36,9 +36,6 @@ public slots:
     virtual void linkLossExpected(const bool yes) = 0;
     virtual void setReconnectDelayMs(const quint16 &ms) = 0;
 
-//    virtual void loadSettings() = 0;
-//    virtual void writeSettings() = 0;
-
 };
 
 

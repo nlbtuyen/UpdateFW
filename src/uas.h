@@ -227,7 +227,6 @@ protected: //COMMENTS FOR TEST UNIT
     QString shortModeText;          ///< Short textual mode description
     bool attitudeStamped;           ///< Should arriving data be timestamped with the last attitude? This helps with broken system time clocks on the MAV
     quint64 lastAttitude;           ///< Timestamp of last attitude measurement
-//    QGCHilLink* simulation;         ///< Hardware in the loop simulation link
     bool isLocalPositionKnown;      ///< If the local position has been received for this MAV
     bool isGlobalPositionKnown;     ///< If the global position has been received for this MAV
     bool systemIsArmed;             ///< If the system is armed
@@ -250,18 +249,10 @@ public:
     /**  Check if vehicle is armed */
     bool isArmed() const { return systemIsArmed; }
 
-//    UASWaypointManager* getWaypointManager() {
-//        return &waypointManager;
-//    }
     /**  Get reference to the param manager **/
     UASParamManager* getParamManager() const {
         return paramManager;
     }
-    /**  Get the HIL simulation */
-//    QGCHilLink* getHILSimulation() const {
-//        return simulation;
-//    }
-    // TODO Will be removed
     /**  Set reference to the param manager **/
     void setParamManager(UASParamManager* manager) {
         paramManager = manager;
@@ -419,21 +410,12 @@ public slots:
 
     /**  Launches the system **/
     void launch();
-    /**  Write this waypoint to the list of waypoints */
-    //void setWaypoint(Waypoint* wp); FIXME tbd
-    /**  Set currently active waypoint */
-    //void setWaypointActive(int id); FIXME tbd
     /**  Order the robot to return home **/
     void home();
     /**  Order the robot to land **/
     void land();
     void halt();
     void go();
-
-    /**  Enable / disable HIL */
-//    void enableHilFlightGear(bool enable, QString options);
-//    void enableHilXPlane(bool enable);
-
 
     /**  Send the full HIL state to the MAV */
 
@@ -472,9 +454,6 @@ public slots:
     void setManualControlCommands(double roll, double pitch, double yaw, double thrust, int xHat, int yHat, int buttons);
     /**  Receive a button pressed event from an input device, e.g. joystick */
     void receiveButton(int buttonIndex);
-
-    /**  Set the values for the 6dof manual control of the vehicle */
-//    void setManual6DOFControlCommands(double x, double y, double z, double roll, double pitch, double yaw);
 
     /**  Add a link associated with this robot */
     void addLink(LinkInterface* link);
@@ -538,7 +517,6 @@ public slots:
     void enableExtendedSystemStatusTransmission(int rate);
     void enableRCChannelDataTransmission(int rate);
     void enableRawControllerDataTransmission(int rate);
-    //void enableRawSensorFusionTransmission(int rate);
     void enablePositionTransmission(int rate);
     void enableExtra1Transmission(int rate);
     void enableExtra2Transmission(int rate);
@@ -566,17 +544,12 @@ public slots:
     void deleteSettings();
 
 signals:
-    /**  The main/battery voltage has changed/was updated */
-    //void voltageChanged(int uasId, double voltage); // Defined in UASInterface already
-    /**  An actuator value has changed */
-    //void actuatorChanged(UASInterface*, int actId, double value); // Defined in UASInterface already
     /**  An actuator value has changed */
     void actuatorChanged(UASInterface* uas, QString actuatorName, double min, double max, double value);
     void motorChanged(UASInterface* uas, QString motorName, double min, double max, double value);
     /**  The system load (MCU/CPU usage) changed */
     void loadChanged(UASInterface* uas, double load);
     /**  Propagate a heartbeat received from the system */
-    //void heartbeat(UASInterface* uas); // Defined in UASInterface already
     void imageStarted(quint64 timestamp);
     /**  A new camera image has arrived */
     void imageReady(UASInterface* uas);
@@ -610,13 +583,6 @@ protected slots:
     void writeSettings();
     /**  Read settings from disk */
     void readSettings();
-
-//    // MESSAGE RECEPTION
-//    /**  Receive a named value message */
-//    void receiveMessageNamedValue(const mavlink_message_t& message);
-
-private:
-//    unsigned int mode;          ///< The current mode of the MAV
 };
 
 

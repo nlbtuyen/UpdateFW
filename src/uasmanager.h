@@ -112,9 +112,6 @@ public:
         }
     }
 
-//    void wgs84ToNed(const double& lat, const double& lon, const double& alt, double* north, double* east, double* down);
-
-
 public slots:
 
     /**
@@ -255,10 +252,6 @@ signals:
     /**  Current home position changed */
     void homePositionChanged(double lat, double lon, double alt);
 public:
-    /* Need to align struct pointer to prevent a memory assertion:
-     * See http://eigen.tuxfamily.org/dox-devel/TopicUnalignedArrayAssert.html
-     * for details
-     */
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW
 };
 

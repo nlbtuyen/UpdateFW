@@ -4,9 +4,6 @@
 #include <QThread>
 #include <QString>
 #include <QByteArray>
-//#include "common/common.h"
-//#include "common/mavlink.h"
-//#include "common/mavlink_types.h"
 #include "linkinterface.h"
 
 class ProtocolInterface : public QObject

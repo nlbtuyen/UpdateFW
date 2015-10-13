@@ -122,7 +122,6 @@ bool SerialLink::validateConnection() {
         if (!m_linkLossExpected)
             emit communicationError(this->getName(), tr("Link %1 unexpectedly disconnected!").arg(this->porthandle));
         qWarning() << ok << port->lastError() << port->errorString();
-        //this->disconnect();
         return false;
     }
     return true;

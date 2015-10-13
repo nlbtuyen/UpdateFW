@@ -1,23 +1,8 @@
-#include <QWidget>
-#include <QMainWindow>
-#include <QMessageBox>
-#include <QtSerialPort/QSerialPort>
-#include <QTimer>
-#include <QDebug>
-#include <QLayout>
-#include <QWidget>
-#include <QFile>
-#include <QTextStream>
-#include <QDockWidget>
-#include <QSettings>
-#include <QDesktopWidget>
-#include <QStyleFactory>
-#include <QDesktopServices>
-#include <QVariant>
-#include <QToolBar>
 #include <QFileInfo>
+#include <QFile>
 #include <QFileDialog>
-
+#include <QMessageBox>
+#include <QDebug>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "qgc.h"
@@ -60,10 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(UASManager::instance(), SIGNAL(UASCreated(UASInterface*)), this, SLOT(UASCreated(UASInterface*)));
     connect(UASManager::instance(), SIGNAL(UASDeleted(UASInterface*)), this, SLOT(UASDeleted(UASInterface*)));
 
-
     connect(ui->flashButton, SIGNAL(clicked()), this, SLOT(flashFW()));
     connect(ui->SelectFirmwareButton, SIGNAL(clicked()), this, SLOT(selectFWToFlash()));
-
 
     //Process Slots for Update Firmware
     ps_master.setProcessChannelMode(QProcess::MergedChannels);
@@ -73,7 +56,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setActiveUAS(UASManager::instance()->getActiveUAS());
     connect(UASManager::instance(), SIGNAL(activeUASSet(UASInterface*)), this, SLOT(setActiveUAS(UASInterface*)));
-//    updateGUI(false);
 }
 
 MainWindow::~MainWindow()
@@ -84,43 +66,6 @@ MainWindow::~MainWindow()
         LinkManager::instance()->removeLink(link);
     }
     delete ui;
-}
-
-void MainWindow::addLinkImmediately()
-{
-    if (connectFlag)
-    {
-        SerialLink *link = new SerialLink();
-        CommConfigurationWindow* commWidget = new CommConfigurationWindow(link, mavlink, this);
-
-        commWidget->setConnection();
-
-        LinkManager::instance()->add(link);
-        LinkManager::instance()->addProtocol(link, mavlink);
-
-        if (link->isPortHandleValid())
-        {
-            if (link->connect())
-            {
-                //                ui->btn_connectBoard->setText(QString("Disconnect"));
-                //                ui->scrollArea->setStyleSheet(QString("background-color: green; border-radius: 12px"));
-                //                ui->statusBar->showMessage(tr("Connected"));
-                updateGUI(true);
-                ui->actionConfigure->setEnabled(false);
-                connectFlag = false;
-            }
-        }
-        else
-        {
-            LinkManager::instance()->removeLink(link);
-            MainWindow::instance()->showCriticalMessage(tr("Error!"), tr("Please plugin your device to begin."));
-        }
-    }
-    else
-    {
-        closeSerialPort();
-        connectFlag = true;
-    }
 }
 
 void MainWindow::addLink()
@@ -152,8 +97,6 @@ void MainWindow::setActiveUAS(UASInterface *uas)
 {
     // Do nothing if system is the same or NULL
     if (uas == NULL) return;
-
-//    connect(uas,SIGNAL(heartbeatTimeout(bool,uint)),this,SLOT(heartbeatTimeout(bool,uint)));
 }
 
 void MainWindow::UASSpecsChanged(int uas)
@@ -257,7 +200,6 @@ void MainWindow::selectFWToFlash()
         QFile file(fileNameLocale);
         if (!file.open(QIODevice::ReadOnly))
         {
-            qDebug() << "could not open";
             showCriticalMessage(tr("Warning!"),tr("Could not open firmware file. %1").arg(file.errorString()));
             return;
         }
@@ -396,40 +338,6 @@ void MainWindow::showCriticalMessage(const QString &title, const QString &messag
     showMessage(title, message, "", "critical");
 }
 
-void MainWindow::heartbeatTimeout(bool timeout, unsigned int ms)
-{
-    if (timeout)
-    {
-        updateGUI(false);
-        //        if (ms > 5000)
-        //        {
-        ////            ui->statusBar->showMessage(tr("Disconnected"));
-        ////            ui->scrollArea->setStyleSheet(QString("background-color: red; border-radius: 12px"));
-        ////            ui->btn_connectBoard->setText(QString("Connect to Board"));
-        //            updateGUI(false);
-        //            return;
-        //        }
-        //        else
-        //        {
-        //            if ((ms/100) % 2 == 0)
-        //            {
-        ////                ui->scrollArea->setStyleSheet(QString("background-color: yellow; border-radius: 12px"));
-        //            }
-        //            else
-        //            {
-        ////                ui->scrollArea->setStyleSheet(QString("background-color: red; border-radius: 12px"));
-        //            }
-        ////            ui->statusBar->showMessage(tr("Waiting..."));
-        //        }
-    }
-    else
-    {
-        //        ui->scrollArea->setStyleSheet(QString("background-color: green; border-radius: 12px"));
-        //        ui->statusBar->showMessage(tr("Connected"));
-        updateGUI(true);
-    }
-}
-
 void MainWindow::updateGUI(bool ready)
 {
     if (ready)
@@ -441,10 +349,4 @@ void MainWindow::updateGUI(bool ready)
         ui->groupBox_SelectFW->setEnabled(false);
     }
 }
-
-void MainWindow::up()
-{
-    updateGUI(false);
-}
-
 

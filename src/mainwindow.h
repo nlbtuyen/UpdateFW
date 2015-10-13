@@ -21,25 +21,9 @@
 #include "mavlinkdecoder.h"
 #include "commconfigurationwindow.h"
 
-
 namespace Ui {
 class MainWindow;
 }
-class Drone;
-class Window;
-class GLWidget;
-class ToolBar;
-class MAVLinkProtocol;
-class MAVLinkDecoder;
-class UAVConfig;
-class UASInterface;
-class SerialLink;
-class MAVLinkMessageSender;
-class ParameterInterface;
-class UASInfoWidget;
-class CommConfigurationWindow;
-class HUDWidget;
-class CompassWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -60,7 +44,6 @@ public:
 protected:
     bool connectFlag;
     MAVLinkProtocol* mavlink;
-    UAVConfig *config; //main tab configuration VSK
     UASInterface* _uas;
     QTextEdit* activeProcessStatusWdgt;
     bool fwFlashActive;
@@ -70,23 +53,21 @@ protected:
     QString aqBinFolderPath;    // absolute path to AQ supporting utils
 
 public slots:
-    /**   Add a communication link */
+    //Add a communication link
     void addLink();
     void addLink(LinkInterface* link);
-    void addLinkImmediately();
-
-    /**   Add a new UAS */
-    void UASCreated(UASInterface* uas);
-    /**   Set the system that is currently displayed by this widget */
-    void setActiveUAS(UASInterface* active);
-    /**   Update system specs of a UAS */
-    void UASSpecsChanged(int uas);
-    /** Delete an UAS */
-    void UASDeleted(UASInterface* uas);
-
     void closeSerialPort();
 
+    //Add a new UAS
+    void UASCreated(UASInterface* uas);
+    //Set the system that is currently displayed by this widget
+    void setActiveUAS(UASInterface* active);
+    //Update system specs of a UAS
+    void UASSpecsChanged(int uas);
+    //Delete an UAS */
+    void UASDeleted(UASInterface* uas);
 
+    //Update FW
     bool checkAqConnected(bool interactive = false);
     void selectFWToFlash();
     void flashFW();
@@ -96,14 +77,12 @@ public slots:
     void prtstdout();
     QString extProcessError(QProcess::ProcessError err);
 
-    /**   Shows an info or warning message */
+    //Shows an info or warning message
     void showMessage(const QString &title, const QString &message, const QString &details, const QString severity = "info");
-    /**   Shows a critical message as popup or as widget */
     void showCriticalMessage(const QString& title, const QString& message);
 
-    void heartbeatTimeout(bool timeout, unsigned int ms);
     void updateGUI(bool ready);
-void up();
+
 public:
     Ui::MainWindow *ui;
 };

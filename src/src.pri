@@ -14,7 +14,7 @@ SOURCES +=  $$PWD/main.cpp\
             $$PWD/mavlinkdecoder.cpp \
             $$PWD/commconfigurationwindow.cpp \
             $$PWD/serialconfigurationwindow.cpp \
-    $$PWD/uasparammanager.cpp
+            $$PWD/uasparammanager.cpp
 
 HEADERS  += $$PWD/mainwindow.h \
             $$PWD/uasinterface.h \
@@ -33,7 +33,7 @@ HEADERS  += $$PWD/mainwindow.h \
             $$PWD/mg.h \
             $$PWD/commconfigurationwindow.h \
             $$PWD/serialconfigurationwindow.h \
-    $$PWD/uasparammanager.h
+            $$PWD/uasparammanager.h
 
 FORMS    += $$PWD/mainwindow.ui \
             $$PWD/commsettings.ui \

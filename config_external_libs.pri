@@ -1,5 +1,4 @@
 
-#################################################################
 # EXTERNAL LIBRARY CONFIGURATION
 
 ## Required libs

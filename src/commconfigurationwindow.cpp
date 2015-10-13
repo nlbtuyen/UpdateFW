@@ -25,11 +25,8 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
     // add link types
     ui.linkType->addItem(tr("Serial"), QGC_LINK_SERIAL);
     ui.linkType->setEditable(false);
-
     ui.connectionType->addItem("MAVLink", QGC_PROTOCOL_MAVLINK);
-
     ui.connectButton->setProperty("type", "toggle-ok-warn");
-    //    ui.deleteButton->setProperty("type", "push-vital");
 
     // Create action to open this menu
     // Create configuration action for this link
@@ -47,10 +44,7 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
 
     // Setup user actions and link notifications
     connect(ui.connectButton, SIGNAL(clicked()), this, SLOT(setConnection()));
-    //    connect(ui.deleteButton, SIGNAL(clicked()), this, SLOT(remove()));
-
     connect(this->link, SIGNAL(connected(bool)), this, SLOT(connectionState(bool)));
-
 
     // Fill in the current data
     if(this->link->isConnected()) ui.connectButton->setChecked(true);
@@ -61,15 +55,13 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
         ui.connectionStatusLabel->setText(tr("Disconnected"));
     }
 
-
     // Open details pane for serial link if necessary
     SerialLink* serial = dynamic_cast<SerialLink*>(link);
-    //    if(serial != 0) {
-    QWidget* conf = new SerialConfigurationWindow(serial, this);
-    ui.linkScrollArea->setWidget(conf);
-    //        ui.linkGroupBox->setTitle(tr("Serial Link"));
-    ui.linkType->setCurrentIndex(0);
-    //    }
+    if(serial != 0) {
+        QWidget* conf = new SerialConfigurationWindow(serial, this);
+        ui.linkScrollArea->setWidget(conf);
+        ui.linkType->setCurrentIndex(0);
+    }
 
     // Open details pane for MAVLink if necessary
     MAVLinkProtocol* mavlink = dynamic_cast<MAVLinkProtocol*>(protocol);
@@ -129,16 +121,11 @@ QAction* CommConfigurationWindow::getAction()
 
 void CommConfigurationWindow::setLinkType(int linktype)
 {
-        if(link->isConnected())
-        {
-            // close old configuration window
-//            this->window()->close();
-        }
-        else
-        {
-            // delete old configuration window
-            this->remove();
-        }
+    if(!link->isConnected())
+    {
+        // delete old configuration window
+        this->remove();
+    }
 
     LinkInterface *tmpLink(NULL);
 
@@ -146,7 +133,6 @@ void CommConfigurationWindow::setLinkType(int linktype)
         SerialLink *serial = new SerialLink();
         tmpLink = serial;
         MainWindow::instance()->addLink(tmpLink);
-
     }
 
     const int32_t& linkIndex(LinkManager::instance()->getLinks().indexOf(tmpLink));

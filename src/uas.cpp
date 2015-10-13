@@ -128,7 +128,6 @@ UAS::~UAS()
     writeSettings();
     delete links;
     delete statusTimeout;
-    //    delete simulation;
 }
 
 /**

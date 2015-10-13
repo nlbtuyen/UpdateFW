@@ -18,7 +18,6 @@
 class SerialLink : public SerialLinkInterface
 {
     Q_OBJECT
-    //Q_INTERFACES(SerialLinkInterface:LinkInterface)
 
 public:
 
@@ -69,9 +68,6 @@ public:
     qint64 getMaxDownstream();
     qint64 getBitsSent();
     qint64 getBitsReceived();
-
-//    void loadSettings();
-//    void writeSettings();
 
     void run();
 
@@ -160,7 +156,6 @@ private:
     bool hardwareConnect();
 
     bool mode_port;  // esc32 mode
-    //char SerialIn[1];
     int countRetry;
     int maxLength;
     char data[4096];
