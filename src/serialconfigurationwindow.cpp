@@ -74,6 +74,7 @@ SerialConfigurationWindow::SerialConfigurationWindow(LinkInterface* link, QWidge
     // Display the widget
     setLinkName(this->link->getName());
     this->window()->setWindowTitle(tr("Serial Communication Settings"));
+
 }
 
 SerialConfigurationWindow::~SerialConfigurationWindow()

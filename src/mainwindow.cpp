@@ -55,9 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //Move protocol outside UI
     mavlink = new MAVLinkProtocol();
 
-    connect(ui->btn_connectBoard, SIGNAL(clicked()), this, SLOT(addLinkImmediately()));
-//    connect(ui->actionConnect, SIGNAL(triggered()), this, SLOT(addLinkImmediately()));
-//    connect(ui->actionConfigure, SIGNAL(triggered()), this, SLOT(addLink()));
+    addLink();
 
     connect(UASManager::instance(), SIGNAL(UASCreated(UASInterface*)), this, SLOT(UASCreated(UASInterface*)));
     connect(UASManager::instance(), SIGNAL(UASDeleted(UASInterface*)), this, SLOT(UASDeleted(UASInterface*)));
@@ -75,7 +73,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setActiveUAS(UASManager::instance()->getActiveUAS());
     connect(UASManager::instance(), SIGNAL(activeUASSet(UASInterface*)), this, SLOT(setActiveUAS(UASInterface*)));
-    updateGUI(false);
+//    updateGUI(false);
 }
 
 MainWindow::~MainWindow()
@@ -104,9 +102,9 @@ void MainWindow::addLinkImmediately()
         {
             if (link->connect())
             {
-                ui->btn_connectBoard->setText(QString("Disconnect"));
-                ui->scrollArea->setStyleSheet(QString("background-color: green; border-radius: 12px"));
-                ui->statusBar->showMessage(tr("Connected"));
+                //                ui->btn_connectBoard->setText(QString("Disconnect"));
+                //                ui->scrollArea->setStyleSheet(QString("background-color: green; border-radius: 12px"));
+                //                ui->statusBar->showMessage(tr("Connected"));
                 updateGUI(true);
                 ui->actionConfigure->setEnabled(false);
                 connectFlag = false;
@@ -144,8 +142,7 @@ void MainWindow::addLink(LinkInterface *link)
     if (!getActionByLink(link))
     {
         CommConfigurationWindow* commWidget = new CommConfigurationWindow(link, mavlink, this);
-        QAction* action = commWidget->getAction();
-        ui->menuWidgets->addAction(action);
+        ui->scrollArea_seriallink->setWidget(commWidget);
         connect(link, SIGNAL(communicationError(QString,QString)), this, SLOT(showCriticalMessage(QString,QString)), Qt::QueuedConnection);
 
     }
@@ -156,8 +153,7 @@ void MainWindow::setActiveUAS(UASInterface *uas)
     // Do nothing if system is the same or NULL
     if (uas == NULL) return;
 
-    connect(uas,SIGNAL(heartbeatTimeout(bool,uint)),this,SLOT(heartbeatTimeout(bool,uint)));
-
+//    connect(uas,SIGNAL(heartbeatTimeout(bool,uint)),this,SLOT(heartbeatTimeout(bool,uint)));
 }
 
 void MainWindow::UASSpecsChanged(int uas)
@@ -186,6 +182,8 @@ void MainWindow::UASCreated(UASInterface* uas)
 
     connect(_uas, SIGNAL(systemSpecsChanged(int)), this, SLOT(UASSpecsChanged(int)));
 
+    updateGUI(true);
+
 }
 
 void MainWindow::UASDeleted(UASInterface *uas)
@@ -204,6 +202,8 @@ void MainWindow::closeSerialPort()
     {
         link->disconnect();
         LinkManager::instance()->removeLink(link);
+        updateGUI(false);
+
     }
     ui->actionConfigure->setEnabled(true);
 }
@@ -244,7 +244,7 @@ bool MainWindow::checkAqConnected(bool interactive)
 void MainWindow::selectFWToFlash()
 {
     QString dirPath;
-        dirPath = QCoreApplication::applicationDirPath();
+    dirPath = QCoreApplication::applicationDirPath();
 
     QFileInfo dir(dirPath);
 
@@ -314,7 +314,7 @@ bool MainWindow::checkProcRunning(bool warn)
 {
     if (ps_master.state() == QProcess::Running) {
         if (warn)
-        showCriticalMessage(tr("Process already running."),tr("There appears to be an external process (calculation step or firmware flashing) already running. Please abort it first."));
+            showCriticalMessage(tr("Process already running."),tr("There appears to be an external process (calculation step or firmware flashing) already running. Please abort it first."));
         return true;
     }
     return false;
@@ -400,31 +400,32 @@ void MainWindow::heartbeatTimeout(bool timeout, unsigned int ms)
 {
     if (timeout)
     {
-        if (ms > 5000)
-        {
-            ui->statusBar->showMessage(tr("Disconnected"));
-            ui->scrollArea->setStyleSheet(QString("background-color: red; border-radius: 12px"));
-            ui->btn_connectBoard->setText(QString("Connect to Board"));
-            updateGUI(false);
-            return;
-        }
-        else
-        {
-            if ((ms/100) % 2 == 0)
-            {
-                ui->scrollArea->setStyleSheet(QString("background-color: yellow; border-radius: 12px"));
-            }
-            else
-            {
-                ui->scrollArea->setStyleSheet(QString("background-color: red; border-radius: 12px"));
-            }
-            ui->statusBar->showMessage(tr("Waiting..."));
-        }
+        updateGUI(false);
+        //        if (ms > 5000)
+        //        {
+        ////            ui->statusBar->showMessage(tr("Disconnected"));
+        ////            ui->scrollArea->setStyleSheet(QString("background-color: red; border-radius: 12px"));
+        ////            ui->btn_connectBoard->setText(QString("Connect to Board"));
+        //            updateGUI(false);
+        //            return;
+        //        }
+        //        else
+        //        {
+        //            if ((ms/100) % 2 == 0)
+        //            {
+        ////                ui->scrollArea->setStyleSheet(QString("background-color: yellow; border-radius: 12px"));
+        //            }
+        //            else
+        //            {
+        ////                ui->scrollArea->setStyleSheet(QString("background-color: red; border-radius: 12px"));
+        //            }
+        ////            ui->statusBar->showMessage(tr("Waiting..."));
+        //        }
     }
     else
     {
-        ui->scrollArea->setStyleSheet(QString("background-color: green; border-radius: 12px"));
-        ui->statusBar->showMessage(tr("Connected"));
+        //        ui->scrollArea->setStyleSheet(QString("background-color: green; border-radius: 12px"));
+        //        ui->statusBar->showMessage(tr("Connected"));
         updateGUI(true);
     }
 }
@@ -439,6 +440,11 @@ void MainWindow::updateGUI(bool ready)
     {
         ui->groupBox_SelectFW->setEnabled(false);
     }
+}
+
+void MainWindow::up()
+{
+    updateGUI(false);
 }
 
 

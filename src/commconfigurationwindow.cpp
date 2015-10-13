@@ -29,7 +29,7 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
     ui.connectionType->addItem("MAVLink", QGC_PROTOCOL_MAVLINK);
 
     ui.connectButton->setProperty("type", "toggle-ok-warn");
-    ui.deleteButton->setProperty("type", "push-vital");
+    //    ui.deleteButton->setProperty("type", "push-vital");
 
     // Create action to open this menu
     // Create configuration action for this link
@@ -47,7 +47,7 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
 
     // Setup user actions and link notifications
     connect(ui.connectButton, SIGNAL(clicked()), this, SLOT(setConnection()));
-    connect(ui.deleteButton, SIGNAL(clicked()), this, SLOT(remove()));
+    //    connect(ui.deleteButton, SIGNAL(clicked()), this, SLOT(remove()));
 
     connect(this->link, SIGNAL(connected(bool)), this, SLOT(connectionState(bool)));
 
@@ -64,12 +64,12 @@ CommConfigurationWindow::CommConfigurationWindow(LinkInterface* link, ProtocolIn
 
     // Open details pane for serial link if necessary
     SerialLink* serial = dynamic_cast<SerialLink*>(link);
-    if(serial != 0) {
-        QWidget* conf = new SerialConfigurationWindow(serial, this);
-        ui.linkScrollArea->setWidget(conf);
-        ui.linkGroupBox->setTitle(tr("Serial Link"));
-        ui.linkType->setCurrentIndex(0);
-    }
+    //    if(serial != 0) {
+    QWidget* conf = new SerialConfigurationWindow(serial, this);
+    ui.linkScrollArea->setWidget(conf);
+    //        ui.linkGroupBox->setTitle(tr("Serial Link"));
+    ui.linkType->setCurrentIndex(0);
+    //    }
 
     // Open details pane for MAVLink if necessary
     MAVLinkProtocol* mavlink = dynamic_cast<MAVLinkProtocol*>(protocol);
@@ -129,16 +129,16 @@ QAction* CommConfigurationWindow::getAction()
 
 void CommConfigurationWindow::setLinkType(int linktype)
 {
-    if(link->isConnected())
-    {
-        // close old configuration window
-        this->window()->close();
-    }
-    else
-    {
-        // delete old configuration window
-        this->remove();
-    }
+        if(link->isConnected())
+        {
+            // close old configuration window
+//            this->window()->close();
+        }
+        else
+        {
+            // delete old configuration window
+            this->remove();
+        }
 
     LinkInterface *tmpLink(NULL);
 
@@ -197,8 +197,18 @@ void CommConfigurationWindow::remove()
         LinkManager::instance()->removeLink(link); //remove link from LinkManager list
         link->deleteLater();
     }
+}
 
-    this->window()->close();
+void CommConfigurationWindow::updateGUI(bool status)
+{
+    if (status)
+    {
+        ui.linkScrollArea->setEnabled(false);
+    }
+    else
+    {
+        ui.linkScrollArea->setEnabled(true);
+    }
 }
 
 void CommConfigurationWindow::connectionState(bool connect)
@@ -211,4 +221,5 @@ void CommConfigurationWindow::connectionState(bool connect)
         ui.connectionStatusLabel->setText(tr("Disconnected"));
         ui.connectButton->setText(tr("Connect"));
     }
+    updateGUI(connect);
 }

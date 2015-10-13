@@ -103,7 +103,7 @@ public slots:
 
     void heartbeatTimeout(bool timeout, unsigned int ms);
     void updateGUI(bool ready);
-
+void up();
 public:
     Ui::MainWindow *ui;
 };

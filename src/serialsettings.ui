@@ -6,25 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>190</width>
-    <height>164</height>
+    <width>215</width>
+    <height>290</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>190</width>
-    <height>164</height>
+    <width>215</width>
+    <height>290</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>193</width>
-    <height>164</height>
+    <width>215</width>
+    <height>290</height>
    </size>
   </property>
   <property name="font">
    <font>
     <family>Arial</family>
+    <pointsize>9</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -33,9 +34,9 @@
   <widget class="QLabel" name="portlabel">
    <property name="geometry">
     <rect>
-     <x>6</x>
-     <y>6</y>
-     <width>49</width>
+     <x>15</x>
+     <y>12</y>
+     <width>91</width>
      <height>20</height>
     </rect>
    </property>
@@ -46,11 +47,23 @@
   <widget class="QComboBox" name="stopBitsCombo">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>84</y>
-     <width>110</width>
+     <x>100</x>
+     <y>90</y>
+     <width>115</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>115</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>115</width>
+     <height>20</height>
+    </size>
    </property>
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Number of stop bits per symbol. This is almost always 1.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -72,21 +85,21 @@
   <widget class="QComboBox" name="portName">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>6</y>
-     <width>110</width>
+     <x>100</x>
+     <y>12</y>
+     <width>115</width>
      <height>20</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
-     <width>110</width>
+     <width>115</width>
      <height>20</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>110</width>
+     <width>115</width>
      <height>20</height>
     </size>
    </property>
@@ -109,9 +122,9 @@
   <widget class="QLabel" name="portlabel_2">
    <property name="geometry">
     <rect>
-     <x>6</x>
-     <y>32</y>
-     <width>50</width>
+     <x>15</x>
+     <y>38</y>
+     <width>91</width>
      <height>20</height>
     </rect>
    </property>
@@ -122,9 +135,9 @@
   <widget class="QLabel" name="portlabel_5">
    <property name="geometry">
     <rect>
-     <x>6</x>
-     <y>136</y>
-     <width>43</width>
+     <x>15</x>
+     <y>142</y>
+     <width>91</width>
      <height>20</height>
     </rect>
    </property>
@@ -135,11 +148,23 @@
   <widget class="QComboBox" name="dataBitsCombo">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>136</y>
-     <width>110</width>
+     <x>100</x>
+     <y>142</y>
+     <width>115</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>115</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>115</width>
+     <height>20</height>
+    </size>
    </property>
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Number of data bits per symbol. This is almost always 8.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -171,9 +196,9 @@
   <widget class="QLabel" name="portlabel_6">
    <property name="geometry">
     <rect>
-     <x>6</x>
-     <y>84</y>
-     <width>42</width>
+     <x>15</x>
+     <y>90</y>
+     <width>91</width>
      <height>20</height>
     </rect>
    </property>
@@ -184,21 +209,21 @@
   <widget class="QComboBox" name="baudRate">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>32</y>
-     <width>110</width>
+     <x>100</x>
+     <y>38</y>
+     <width>115</width>
      <height>20</height>
     </rect>
    </property>
    <property name="minimumSize">
     <size>
-     <width>110</width>
+     <width>115</width>
      <height>20</height>
     </size>
    </property>
    <property name="maximumSize">
     <size>
-     <width>110</width>
+     <width>115</width>
      <height>20</height>
     </size>
    </property>
@@ -337,9 +362,9 @@
   <widget class="QLabel" name="label_Parity">
    <property name="geometry">
     <rect>
-     <x>6</x>
-     <y>110</y>
-     <width>28</width>
+     <x>15</x>
+     <y>116</y>
+     <width>91</width>
      <height>20</height>
     </rect>
    </property>
@@ -350,9 +375,9 @@
   <widget class="QLabel" name="label_flowControl">
    <property name="geometry">
     <rect>
-     <x>6</x>
-     <y>58</y>
-     <width>61</width>
+     <x>15</x>
+     <y>64</y>
+     <width>91</width>
      <height>20</height>
     </rect>
    </property>
@@ -363,11 +388,23 @@
   <widget class="QComboBox" name="comboBox_flowControl">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>58</y>
-     <width>110</width>
+     <x>100</x>
+     <y>64</y>
+     <width>115</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>115</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>115</width>
+     <height>20</height>
+    </size>
    </property>
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the flow control type. In most cases this is None or HW (aka. DTS/RTS). SW type is aka. XON/XOFF.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -394,11 +431,23 @@
   <widget class="QComboBox" name="comboBox_Parity">
    <property name="geometry">
     <rect>
-     <x>83</x>
-     <y>110</y>
-     <width>110</width>
+     <x>100</x>
+     <y>116</y>
+     <width>115</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>115</width>
+     <height>20</height>
+    </size>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>115</width>
+     <height>20</height>
+    </size>
    </property>
    <property name="toolTip">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Set the parity. In most cases no parity (None) is used.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>

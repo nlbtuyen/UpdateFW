@@ -6,20 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>250</width>
-    <height>250</height>
+    <width>233</width>
+    <height>339</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>250</width>
-    <height>250</height>
+    <width>233</width>
+    <height>339</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>250</width>
-    <height>250</height>
+    <width>233</width>
+    <height>339</height>
    </size>
   </property>
   <property name="font">
@@ -34,71 +34,11 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QGroupBox" name="linkGroupBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>10</y>
-     <width>230</width>
-     <height>200</height>
-    </rect>
-   </property>
-   <property name="minimumSize">
-    <size>
-     <width>230</width>
-     <height>200</height>
-    </size>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>230</width>
-     <height>200</height>
-    </size>
-   </property>
-   <property name="title">
-    <string>Link</string>
-   </property>
-   <widget class="QScrollArea" name="linkScrollArea">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>210</width>
-      <height>170</height>
-     </rect>
-    </property>
-    <property name="minimumSize">
-     <size>
-      <width>210</width>
-      <height>170</height>
-     </size>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>210</width>
-      <height>170</height>
-     </size>
-    </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
-    </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>208</width>
-       <height>168</height>
-      </rect>
-     </property>
-    </widget>
-   </widget>
-  </widget>
   <widget class="QLabel" name="connectionStatusLabel">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>222</y>
+     <y>310</y>
      <width>91</width>
      <height>16</height>
     </rect>
@@ -113,7 +53,7 @@
     <string>Disconnected</string>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>320</x>
@@ -152,9 +92,9 @@
   <widget class="QPushButton" name="connectButton">
    <property name="geometry">
     <rect>
-     <x>126</x>
-     <y>220</y>
-     <width>54</width>
+     <x>160</x>
+     <y>300</y>
+     <width>60</width>
      <height>23</height>
     </rect>
    </property>
@@ -168,18 +108,46 @@
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QPushButton" name="deleteButton">
+  <widget class="QScrollArea" name="linkScrollArea">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>187</x>
-     <y>220</y>
-     <width>53</width>
-     <height>23</height>
+     <x>0</x>
+     <y>0</y>
+     <width>233</width>
+     <height>300</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Delete</string>
+   <property name="minimumSize">
+    <size>
+     <width>233</width>
+     <height>300</height>
+    </size>
    </property>
+   <property name="maximumSize">
+    <size>
+     <width>233</width>
+     <height>300</height>
+    </size>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::NoFrame</enum>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="scrollAreaWidgetContents">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>233</width>
+      <height>300</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <action name="actionDelete">
    <property name="text">

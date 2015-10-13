@@ -46,6 +46,7 @@ public slots:
     void setLinkName(QString name);
     // Disconnects the associated link, removes it from all menus and closes the window.
     void remove();
+    void updateGUI(bool status);
 
 private slots:
     void saveSettings();
